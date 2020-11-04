@@ -6,18 +6,14 @@ const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
+    font-family: 'Mountains of Christmas', cursive;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+    background: linear-gradient(90deg, hsla(165, 89%, 31%, 1) 0%, hsla(161, 46%, 49%, 1) 100%);
+    color: #FFD166;
   }
 `;
 

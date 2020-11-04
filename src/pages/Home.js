@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { getLists } from '../api/lists';
+import FloatingActionButton from '../components/FloatingActionButton';
+import addPath from '../assets/add.svg';
+
+const Header = styled.header`
+  text-align: center;
+`;
+
+const List = styled.ul`
+  list-style: none;
+`;
 
 const Home = () => {
   const [lists, setLists] = useState(null);
@@ -13,13 +24,23 @@ const Home = () => {
 
   return (
     <div>
-      Home
-      {lists?.map((list) => (
-        <Link key={list.id} to={`/${list.id}`}>
-          {list.title}
+      <Header>
+        <h1>Wünsch dir was</h1>
+      </Header>
+      <main>
+        <List>
+          {lists?.map((list) => (
+            <Link key={list.id} to={`/${list.id}`}>
+              <li>{list.title}</li>
+            </Link>
+          ))}
+        </List>
+        <Link to="/add">
+          <FloatingActionButton>
+            <img src={addPath} alt="Link to add page" />
+          </FloatingActionButton>
         </Link>
-      ))}
-      <Link to="/add">Add</Link>
+      </main>
     </div>
   );
 };
