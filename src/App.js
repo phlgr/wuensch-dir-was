@@ -12,7 +12,7 @@ function App() {
         <Route path="/add">
           <Add />
         </Route>
-        <Route path="/:name">
+        <Route path="/:listId">
           <WishList />
         </Route>
         <Route path="/">

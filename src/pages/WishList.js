@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const WishList = () => {
-  const { name } = useParams();
+  const { listId } = useParams();
 
   return (
     <div>
-      <Link to="/">Back</Link> {name} WishList
+      <Link to="/">Back</Link> {listId} WishList
     </div>
   );
 };
