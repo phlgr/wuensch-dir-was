@@ -11,11 +11,15 @@ const WishList = () => {
     setList(newList);
   }, []);
 
+  if (!list) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <Link to="/">Back</Link> {list?.title}
+      <Link to="/">Back</Link> {list.title}
       <ul>
-        {list?.items.map((item) => (
+        {list.items.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
