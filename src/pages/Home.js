@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
+import { getLists } from '../api/lists';
 
 const Home = () => {
+  useEffect(async () => {
+    const lists = await getLists();
+    console.log('useEffect', lists);
+  }, []);
+
   return (
     <div>
       Home
