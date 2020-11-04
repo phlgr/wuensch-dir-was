@@ -1,19 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { getLists } from '../api/lists';
 
 const Home = () => {
+  const [lists, setLists] = useState(null);
+
   useEffect(async () => {
-    const lists = await getLists();
-    console.log('useEffect', lists);
+    const newLists = await getLists();
+    setLists(newLists);
   }, []);
 
   return (
     <div>
       Home
-      <Link to="/philipp">Philipp&apos;s Wishlist</Link>
-      <Link to="/leon">Leon&apos;s Wishlist</Link>
+      {lists?.map((list) => (
+        <Link key={list.id} to={`/${list.id}`}>
+          {list.title}
+        </Link>
+      ))}
       <Link to="/add">Add</Link>
     </div>
   );
