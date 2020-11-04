@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const WishList = () => {
+  const { name } = useParams();
+
   return (
     <div>
-      <Link to="/">Back</Link> WishList
+      <Link to="/">Back</Link> {name} WishList
     </div>
   );
 };
