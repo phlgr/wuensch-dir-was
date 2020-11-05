@@ -4,6 +4,8 @@ import { postList } from '../api/lists';
 
 const Add = () => {
   const [title, setTitle] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
   const handleSubmit = async (event) => {
@@ -13,10 +15,13 @@ const Add = () => {
       return;
     }
 
+    setLoading(true);
     const newList = await postList({
       title,
       items: [],
     });
+    setLoading(false);
+
     history.push(`/${newList.id}`);
   };
 
@@ -34,8 +39,9 @@ const Add = () => {
             required
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" disabled={loading} />
       </form>
+      {loading && <div>Loading...</div>}
     </div>
   );
 };
