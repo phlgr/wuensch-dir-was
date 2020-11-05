@@ -9,4 +9,8 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+Button.defaultProps = {
+  type: 'button',
+};
+
 export default Button;

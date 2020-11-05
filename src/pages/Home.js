@@ -39,7 +39,7 @@ const Home = () => {
           {lists?.map((list) => (
             <li key={list.id}>
               <Link to={`/${list.id}`}>{list.title}</Link>
-              <DangerButton type="button" onClick={() => handleDelete(list.id)}>
+              <DangerButton onClick={() => handleDelete(list.id)}>
                 <span role="img" aria-label="Delete Emoji">
                   ❌
                 </span>
