@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getLists } from '../api/lists';
 import FloatingActionButton from '../components/FloatingActionButton';
 import addPath from '../assets/add.svg';
 
@@ -13,6 +15,13 @@ const List = styled.ul`
 `;
 
 const Home = () => {
+  const [lists, setLists] = useState(null);
+
+  useEffect(async () => {
+    const newLists = await getLists();
+    setLists(newLists);
+  }, []);
+
   return (
     <div>
       <Header>
@@ -20,12 +29,11 @@ const Home = () => {
       </Header>
       <main>
         <List>
-          <Link to="/philipp">
-            <li>Philipp&apos;s Wishlist</li>
-          </Link>
-          <Link to="/leon">
-            <li>Leon&apos;s Wishlist</li>
-          </Link>
+          {lists?.map((list) => (
+            <Link key={list.id} to={`/${list.id}`}>
+              <li>{list.title}</li>
+            </Link>
+          ))}
         </List>
         <Link to="/add">
           <FloatingActionButton>
