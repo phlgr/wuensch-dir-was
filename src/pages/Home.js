@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getLists } from '../api/lists';
+import { deleteListById, getLists } from '../api/lists';
 import FloatingActionButton from '../components/FloatingActionButton';
 import addPath from '../assets/add.svg';
+import DangerButton from '../components/DangerButton';
 
 const Header = styled.header`
   text-align: center;
@@ -16,11 +17,17 @@ const List = styled.ul`
 
 const Home = () => {
   const [lists, setLists] = useState(null);
+  const [refreshAt, setRefreshAt] = useState(Date.now);
 
   useEffect(async () => {
     const newLists = await getLists();
     setLists(newLists);
-  }, []);
+  }, [refreshAt]);
+
+  const handleDelete = async (listId) => {
+    await deleteListById(listId);
+    setRefreshAt(Date.now());
+  };
 
   return (
     <div>
@@ -30,9 +37,14 @@ const Home = () => {
       <main>
         <List>
           {lists?.map((list) => (
-            <Link key={list.id} to={`/${list.id}`}>
-              <li>{list.title}</li>
-            </Link>
+            <li key={list.id}>
+              <Link to={`/${list.id}`}>{list.title}</Link>
+              <DangerButton type="button" onClick={() => handleDelete(list.id)}>
+                <span role="img" aria-label="Delete Emoji">
+                  ❌
+                </span>
+              </DangerButton>
+            </li>
           ))}
         </List>
         <Link to="/add">
