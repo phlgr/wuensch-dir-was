@@ -32,7 +32,6 @@ const Add = () => {
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
-    } finally {
       setLoading(false);
     }
   };
