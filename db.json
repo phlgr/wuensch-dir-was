@@ -6,19 +6,9 @@
       "items": ["Socken", "Koks"]
     },
     {
-      "id": 2,
-      "title": "Leon's List",
-      "items": ["Koks", "Socken"]
-    },
-    {
       "id": 3,
       "title": "Caro's List",
       "items": ["Bier", "Koks"]
-    },
-    {
-      "id": 4,
-      "title": "Opa's List",
-      "items": ["Koks"]
     }
   ]
 }
