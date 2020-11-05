@@ -30,7 +30,6 @@ const Add = () => {
       });
       history.push(`/${newList.id}`);
     } catch (error) {
-      console.error(error);
       setErrorMessage(error.message);
       setLoading(false);
     }
