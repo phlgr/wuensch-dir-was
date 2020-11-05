@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { postList } from '../api/lists';
+
+const ErrorMessage = styled.p`
+  color: red;
+`;
 
 const Add = () => {
   const [title, setTitle] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
@@ -15,14 +21,20 @@ const Add = () => {
       return;
     }
 
-    setLoading(true);
-    const newList = await postList({
-      title,
-      items: [],
-    });
-    setLoading(false);
-
-    history.push(`/${newList.id}`);
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+      const newList = await postList({
+        title,
+        items: [],
+      });
+      history.push(`/${newList.id}`);
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +54,7 @@ const Add = () => {
         <input type="submit" value="Submit" disabled={loading} />
       </form>
       {loading && <div>Loading...</div>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   );
 };
