@@ -16,3 +16,15 @@ export async function deleteListById(id) {
     method: 'DELETE',
   });
 }
+
+export async function postList(list) {
+  const response = await fetch(`http://localhost:5000/lists`, {
+    method: 'POST',
+    body: JSON.stringify(list),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const newList = await response.json();
+  return newList;
+}
